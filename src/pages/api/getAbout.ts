@@ -4,10 +4,10 @@ import { google } from 'googleapis';
 export default async (req: any, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { data: any[][] | null | undefined; }): void; new(): any; }; }; }) => {
   
   const secret = process.env.GOOGLE_CREDS || '';
-  const jsonSecret = JSON.parse(secret)
+  const jsonSecret = JSON.parse(secret.replace(/\\"/g, '"'))
   
   const auth = new GoogleAuth({
-    credentials: jsonSecret,
+    credentials: jsonSecret.secrets,
     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
   });
 
