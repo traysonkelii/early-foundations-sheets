@@ -1,0 +1,33 @@
+.footer_container {
+  text-align: left;
+  padding-top: 2%;
+  font-size: small;
+  display: flex;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.container p {
+  margin-right: auto;
+}
+
+.footer_logo {
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: block;
+  height: auto;
+  width: 40px;
+}
+
+.footer_separator {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media all and (max-width: 900px) {
+  .footer_separator { 
+    justify-content: space-between;
+    font-size: .3rem;
+    margin-bottom: 4%;
+  }
+}

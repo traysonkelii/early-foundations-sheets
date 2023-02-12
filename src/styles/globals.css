@@ -1,0 +1,77 @@
+@font-face {
+  font-family: "Genrock-Regular";
+  src: url("../../public/fonts/OpenSans-Regular.ttf") format("truetype");
+}
+
+/* blue #10b7f1 */
+/* green #00c7b7 */
+/* pink #e4139c */
+/* grass green #8cc640 */
+/* orange #eb6b2a */
+
+@font-face {
+  font-family: "Genrock-Light";
+  src: url("../../public/fonts/OpenSans-Light.ttf") format("truetype");
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+body {
+  margin: 0;
+  font-family: 'Genrock-Regular', Helvetica;
+}
+
+h1, h2 {
+  font-family: 'Genrock-Light', Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: black;
+}
+
+code {
+  font-family: 'Genrock-Regular', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+hr {
+  background-color: gainsboro;
+  height: 1px;
+  border: none;
+}
