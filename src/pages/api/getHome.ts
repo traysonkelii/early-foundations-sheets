@@ -7,7 +7,7 @@ export default async (req: any, res: { status: (arg0: number) => { (): any; new(
   const jsonSecret = JSON.parse(secret)
 
   const auth = new GoogleAuth({
-    credentials: jsonSecret.secrets,
+    credentials: jsonSecret,
     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
   });
 
