@@ -1,25 +1,10 @@
-import { GoogleAuth } from 'google-auth-library';
-import { google } from 'googleapis';
+import axios from 'axios';
 
-export default async (req: any, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { data: any[][] | null | undefined; }): void; new(): any; }; }; }) => {
-  
-  const secret = process.env.GOOGLE_CREDS || '';
-  const jsonSecret = JSON.parse(secret.replace(/\\"/g, '"'))
+export default async (req: any, res: any) => {
 
-  const auth = new GoogleAuth({
-    credentials: jsonSecret.secrets,
-    scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
-  });
+  const baseUrl = process.env.BASE_SHEETS_API_URL;
+  const queryString = 'range=home!A1:Z40';
 
-  const client = await auth.getClient();
-  const sheets = google.sheets({ version: 'v4', auth: client });
-
-  const response = await sheets.spreadsheets.values.get({
-    spreadsheetId: process.env.SHEETS_ID,
-    range: 'home!A1:Z40',
-  });
-
-  const data = response.data.values;
-
-  res.status(200).json({ data });
+  const sheetsResponse = await (await axios.get(baseUrl + queryString)).data;
+  res.status(200).json({ data: sheetsResponse.data });
 };

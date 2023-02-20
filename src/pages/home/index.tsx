@@ -11,10 +11,6 @@ const Home = () => {
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const { homeContext } = useSheetsContext();
 
-  const test = process.env.GOOGLE_CREDS;
-
-  console.log(test)
-
   return (
     <>
       <Banner
