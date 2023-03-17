@@ -12,6 +12,7 @@ import { useMediaQuery } from "react-responsive";
 const Home = () => {
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const { homeContext } = useSheetsContext();
+  const mainText = homeContext.text ?? '';
 
   return (
     <>
@@ -24,7 +25,7 @@ const Home = () => {
       </Banner>
       <HomeTextHolder>
         <div style={{ textAlign: "justify" }}>
-          <p>{homeContext.text}</p>
+          <p dangerouslySetInnerHTML={{__html: mainText}} />
         </div>
         <Link href="/about">
           <HomeButton

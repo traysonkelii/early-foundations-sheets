@@ -11,11 +11,6 @@ const Navbar = () => {
         <Image src={logo} alt={"SVG logo"} width={80} height={80} />
         </Link>
       </div>
-      <Link href="/home" style={{ textDecoration: "none" }}>
-        <div className={styles.navbar__item}>
-          <p>Home</p>
-        </div>
-      </Link>
       <Link href="/about" style={{ textDecoration: "none" }}>
         <div className={styles.navbar__item}>
           <p>About</p>
@@ -24,6 +19,11 @@ const Navbar = () => {
       <Link href="/schools" style={{ textDecoration: "none" }}>
         <div className={styles.navbar__item}>
           <p>Our Schools</p>
+        </div>
+      </Link>
+      <Link href="/approach" style={{ textDecoration: "none" }}>
+        <div className={styles.navbar__item}>
+          <p>Our Approach</p>
         </div>
       </Link>
     </header>

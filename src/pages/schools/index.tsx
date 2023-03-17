@@ -5,6 +5,7 @@ import { useSheetsContext } from "@/context/SheetsContext";
 import React from "react";
 import styled from "styled-components";
 import { CardContainer, SchoolCard } from "./components/SchoolCard";
+import SchoolMap from "./components/SchoolMap";
 
 const Schools = () => {
   const { schoolsContext } = useSheetsContext();
@@ -17,30 +18,36 @@ const Schools = () => {
       />
       <TextHolder>
         <HeaderText>{schoolsContext.title}</HeaderText>
+
+        <SchoolContainer>
+          <div style={{ width: "80%" }}>
+            <SchoolMap />
+          </div>
+        </SchoolContainer>
+        <SchoolContainer>
+          {schoolsContext.cards.map(
+            ({ title, url, address, cityState, image, lat, long }, index) => {
+              return (
+                <SchoolCard
+                  title={title}
+                  url={url}
+                  address={address}
+                  cityState={cityState}
+                  image={image}
+                  lat={lat}
+                  long={long}
+                  key={index}
+                />
+              );
+            }
+          )}
+        </SchoolContainer>
       </TextHolder>
-      <SchoolCardContaier>
-        {schoolsContext.cards.map(
-          ({ title, url, address, cityState, image, lat, long }, index) => {
-            return (
-              <SchoolCard
-                title={title}
-                url={url}
-                address={address}
-                cityState={cityState}
-                image={image}
-                lat={lat}
-                long={long}
-                key={index}
-              />
-            );
-          }
-        )}
-      </SchoolCardContaier>
     </>
   );
 };
 
-const SchoolCardContaier = styled.div`
+const SchoolContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;

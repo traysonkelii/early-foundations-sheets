@@ -8,6 +8,7 @@ export interface SchoolCardData {
   image: string;
   lat?: number;
   long?: number;
+  stateSymbol?: string;
 }
 
 export const SchoolCard = ({

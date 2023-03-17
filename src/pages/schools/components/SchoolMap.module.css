@@ -1,0 +1,8 @@
+.schoolDot {
+  transition: all 1s;
+}
+
+.schoolDot:hover{
+  cursor: pointer;
+  transition: all 1s;
+}

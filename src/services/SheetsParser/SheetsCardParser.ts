@@ -9,6 +9,7 @@ export const SheetsCardParser = (rawSheetsText: string[]): SchoolCardData => {
     image: rawSheetsText[6],
     lat: Number(rawSheetsText[7]),
     long: Number(rawSheetsText[8]),
+    stateSymbol: rawSheetsText[9]
   };
 
   return data;
