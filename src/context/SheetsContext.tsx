@@ -1,6 +1,6 @@
-import { SheetsBannerParser } from "@/services/SheetsParser/SheetsBannerParser";
-import { SheetsTextParser } from "@/services/SheetsParser/SheetsTextParser";
-import { SheetsTitleParser } from "@/services/SheetsParser/SheetsTitleParser";
+import { SchoolCardData } from "@/pages/schools/components/SchoolCard";
+import { SheetsParser } from "@/services/SheetsParser";
+
 import {
   createContext,
   ReactNode,
@@ -17,6 +17,9 @@ export interface Base {
 
 export interface HomeData extends Base {}
 export interface AboutData extends Base {}
+export interface SchoolsData extends Base {
+  cards: SchoolCardData[];
+}
 
 export interface SheetsContext {
   homeContext: HomeData;
@@ -24,6 +27,9 @@ export interface SheetsContext {
 
   aboutContext: AboutData;
   setAboutContext: (aboutData: AboutData) => void;
+
+  schoolsContext: SchoolsData;
+  setSchoolsContext: (schoolData: SchoolsData) => void;
 }
 
 const SheetsContext = createContext<SheetsContext>({
@@ -31,6 +37,8 @@ const SheetsContext = createContext<SheetsContext>({
   setHomeContext: () => {},
   aboutContext: { bannerUrl: "" },
   setAboutContext: () => {},
+  schoolsContext: { bannerUrl: "", cards: [] },
+  setSchoolsContext: () => {},
 });
 
 export const useSheetsContext = () => useContext<SheetsContext>(SheetsContext);
@@ -44,25 +52,38 @@ export const SheetsContextProvider = ({
 }: SheetsContextProviderProps) => {
   const [homeData, setHomeData] = useState<HomeData>({});
   const [aboutData, setAboutData] = useState<AboutData>({});
+  const [schoolData, setSchoolData] = useState<SchoolsData>({cards: []});
 
   useEffect(() => {
     const homeCall = fetch("/api/getHome").then((res) => res.json());
     const aboutCall = fetch("/api/getAbout").then((res) => res.json());
+    const schoolCall = fetch("/api/getSchools").then((res) => res.json());
 
-    Promise.all([homeCall, aboutCall]).then(([homeRes, aboutRes]) => {
-      const homeText = SheetsTextParser(homeRes.data[1]).text;
-      const homeBannerUrl = SheetsBannerParser(homeRes.data[3]).bannerUrl;
-      setHomeData({ text: homeText, bannerUrl: homeBannerUrl });
+    Promise.all([homeCall, aboutCall, schoolCall]).then(
+      ([homeRes, aboutRes, schoolRes]) => {
+        const homeContent = SheetsParser(homeRes);
+        setHomeData({
+          text: homeContent.get("text").text,
+          bannerUrl: homeContent.get("banner").bannerUrl,
+        });
 
-      const aboutText = SheetsTextParser(aboutRes.data[1]).text;
-      const aboutBannerUrl = SheetsBannerParser(aboutRes.data[3]).bannerUrl;
-      const aboutTitleText = SheetsTitleParser(aboutRes.data[5]).titleText;
-      setAboutData({
-        text: aboutText,
-        bannerUrl: aboutBannerUrl,
-        title: aboutTitleText,
-      });
-    });
+        const aboutContent = SheetsParser(aboutRes);
+        setAboutData({
+          text: aboutContent.get('text').text,
+          bannerUrl: aboutContent.get('banner').bannerUrl,
+          title: aboutContent.get('title').titleText,
+        });
+
+        const schoolContent = SheetsParser(schoolRes);
+        setSchoolData({
+          text: schoolContent.get('text').text,
+          bannerUrl: schoolContent.get('banner').bannerUrl,
+          title: schoolContent.get('title').titleText,
+          cards: schoolContent.get('card')
+        });
+        
+      }
+    );
   }, []);
 
   const contextValue: SheetsContext = {
@@ -70,6 +91,8 @@ export const SheetsContextProvider = ({
     setHomeContext: setHomeData,
     aboutContext: aboutData,
     setAboutContext: setAboutData,
+    schoolsContext: schoolData,
+    setSchoolsContext: setSchoolData,
   };
 
   return (
