@@ -1,4 +1,4 @@
-import { parseText } from "./helper";
+import { parseText } from "./helpers";
 import { SheetsButton } from "./models";
 
 export const SheetsButtonParser = (rawSheetsText: string[]): SheetsButton => {

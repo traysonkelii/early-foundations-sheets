@@ -1,15 +1,5 @@
+import { SheetsSchoolCardData } from "@/services/SheetsParser/models";
 import styled from "styled-components";
-
-export interface SchoolCardData {
-  title: string;
-  url: string;
-  address: string;
-  cityState: string;
-  image: string;
-  lat?: number;
-  long?: number;
-  stateSymbol?: string;
-}
 
 export const SchoolCard = ({
   title,
@@ -17,7 +7,7 @@ export const SchoolCard = ({
   address,
   cityState,
   image,
-}: SchoolCardData) => {
+}: SheetsSchoolCardData) => {
   return (
     <CardContainer>
       <a target={"_blank"} href={url} rel={"noopener noreferrer"}>

@@ -1,9 +1,8 @@
 import { buildRangeBasePath } from "@/pages/api/sheets";
-import { SchoolCardData } from "@/pages/schools/components/SchoolCard";
 import { SchoolState } from "@/pages/schools/components/SchoolMap";
 import { SchoolStateParser } from "@/services/SchoolStateParser";
 import { SheetsParser } from "@/services/SheetsParser";
-import { SheetsButton } from "@/services/SheetsParser/models";
+import { SheetsBioData, SheetsButton, SheetsSchoolCardData } from "@/services/SheetsParser/models";
 
 import {
   createContext,
@@ -26,10 +25,12 @@ export interface ApproachData extends Base {
   button: SheetsButton;
 }
 export interface SchoolsData extends Base {
-  cards: SchoolCardData[];
+  cards: SheetsSchoolCardData[];
   schoolStates: SchoolState[];
 }
-export interface TeamData extends Base {}
+export interface TeamData extends Base {
+  bios: SheetsBioData[];
+}
 
 export interface SheetsContext {
   homeContext: HomeData;
@@ -47,7 +48,7 @@ const SheetsContext = createContext<SheetsContext>({
     multiText: [],
     button: { displayValue: "" },
   },
-  teamContext: {},
+  teamContext: {bios: []},
 });
 
 export const useSheetsContext = () => useContext<SheetsContext>(SheetsContext);
@@ -69,7 +70,7 @@ export const SheetsContextProvider = ({
     multiText: [],
     button: { displayValue: "" },
   });
-  const [teamData, setTeamData] = useState<TeamData>({});
+  const [teamData, setTeamData] = useState<TeamData>({bios: []});
 
   useEffect(() => {
     const homeCall = fetch(buildRangeBasePath("home!A1:Z40")).then((res) =>
@@ -84,39 +85,50 @@ export const SheetsContextProvider = ({
     const approachCall = fetch(buildRangeBasePath("approach!A1:Z20")).then(
       (res) => res.json()
     );
+    const teamCall = fetch(buildRangeBasePath("team!A1:Z30")).then(
+      (res) => res.json()
+    );
 
-    Promise.all([homeCall, aboutCall, schoolCall, approachCall]).then(
-      ([homeRes, aboutRes, schoolRes, approachRes]) => {
+    Promise.all([homeCall, aboutCall, schoolCall, approachCall, teamCall]).then(
+      ([homeRes, aboutRes, schoolRes, approachRes, teamRes]) => {
         const homeContent = SheetsParser(homeRes);
         setHomeData({
-          text: homeContent.get("text").text,
-          bannerUrl: homeContent.get("banner").bannerUrl,
+          text: homeContent.text?.value,
+          bannerUrl: homeContent.banner?.imgSource,
         });
 
         const aboutContent = SheetsParser(aboutRes);
         setAboutData({
-          text: aboutContent.get("text").text,
-          bannerUrl: aboutContent.get("banner").bannerUrl,
-          title: aboutContent.get("title").titleText,
+          text: aboutContent.text?.value,
+          bannerUrl: aboutContent.banner?.imgSource,
+          title: aboutContent.title?.value,
         });
 
         const schoolContent = SheetsParser(schoolRes);
-        const schoolStates = SchoolStateParser(schoolContent.get("card"));
+        const schoolStates = SchoolStateParser(schoolContent.cards ?? []);
         setSchoolData({
-          text: schoolContent.get("text").text,
-          bannerUrl: schoolContent.get("banner").bannerUrl,
-          title: schoolContent.get("title").titleText,
-          cards: schoolContent.get("card"),
+          text: schoolContent.text?.value,
+          bannerUrl: schoolContent.banner?.imgSource,
+          title: schoolContent.title?.value,
+          cards: schoolContent.cards ?? [],
           schoolStates: schoolStates,
         });
 
         const approachContent = SheetsParser(approachRes);
         setApproachData({
-          multiText: approachContent.get("multi-text").value,
-          bannerUrl: approachContent.get("banner").bannerUrl,
-          title: approachContent.get("title").titleText,
-          button: approachContent.get("button"),
+          multiText: approachContent.multiText?.value ?? [],
+          bannerUrl: approachContent.banner?.imgSource,
+          title: approachContent.title?.value,
+          button: approachContent.button || {displayValue: 'default button'}
         });
+
+        const teamContent = SheetsParser(teamRes);
+        console.log(teamRes);
+        setTeamData({
+          title: teamContent.title?.value,
+          bannerUrl: teamContent.banner?.imgSource,
+          bios: teamContent.bios ?? [],
+        })
       }
     );
   }, []);

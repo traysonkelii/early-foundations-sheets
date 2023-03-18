@@ -26,6 +26,11 @@ const Navbar = () => {
           <p>Our Approach</p>
         </div>
       </Link>
+      <Link href="/team" style={{ textDecoration: "none" }}>
+        <div className={styles.navbar__item}>
+          <p>Our Team</p>
+        </div>
+      </Link>
     </header>
   );
 };

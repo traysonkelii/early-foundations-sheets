@@ -1,7 +1,7 @@
-import { SchoolCardData } from "@/pages/schools/components/SchoolCard";
 import { SchoolState } from "@/pages/schools/components/SchoolMap";
+import { SheetsSchoolCardData } from "../SheetsParser/models";
 
-export const SchoolStateParser = (schools: SchoolCardData[]) => {
+export const SchoolStateParser = (schools: SheetsSchoolCardData[]) => {
 
   const schoolStates: SchoolState[] = schools.map((school) => {
     const schoolState: SchoolState = {

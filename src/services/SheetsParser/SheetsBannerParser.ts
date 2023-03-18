@@ -1,4 +1,8 @@
-export const SheetsBannerParser = (rawBannerText: string[]) => {
-  const bannerUrl = rawBannerText[2];
-  return { bannerUrl };
+import { SheetsBannerData } from "./models";
+
+export const SheetsBannerParser = (
+  rawBannerText: string[]
+): SheetsBannerData => {
+  const imgSource = rawBannerText[2];
+  return { imgSource };
 };

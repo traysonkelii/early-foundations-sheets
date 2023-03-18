@@ -1,6 +1,8 @@
-import { parseText } from "./helper";
+import { parseText } from "./helpers";
+import { SheetsTextData } from "./models";
 
-export const SheetsTextParser = (rawSheetsText: string[]) => {
-  const text = parseText(rawSheetsText[2]);
-  return { text };
+export const SheetsTextParser = (rawSheetsText: string[]): SheetsTextData => {
+  const value = parseText(rawSheetsText[2]);
+  return { value };
 };
+

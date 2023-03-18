@@ -1,7 +1,7 @@
-import { SchoolCardData } from "@/pages/schools/components/SchoolCard";
+import { SheetsSchoolCardData } from "./models";
 
-export const SheetsCardParser = (rawSheetsText: string[]): SchoolCardData => {
-  const data: SchoolCardData = {
+export const SheetsCardParser = (rawSheetsText: string[]): SheetsSchoolCardData => {
+  const data: SheetsSchoolCardData = {
     title: rawSheetsText[2],
     url: rawSheetsText[3],
     address: rawSheetsText[5],
