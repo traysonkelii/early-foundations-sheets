@@ -4,7 +4,7 @@ import { TextHolder } from "@/components/TextHolder";
 import { useSheetsContext } from "@/context/SheetsContext";
 import React from "react";
 
-const about = () => {
+const About = () => {
   const { aboutContext } = useSheetsContext();
 
   return (
@@ -21,4 +21,4 @@ const about = () => {
   );
 };
 
-export default about;
+export default About;

@@ -4,7 +4,7 @@ import { TextHolder } from "@/components/TextHolder";
 import { useSheetsContext } from "@/context/SheetsContext";
 import React from "react";
 
-const team = () => {
+const Team = () => {
   const { teamContext } = useSheetsContext();
 
   return (
@@ -20,4 +20,4 @@ const team = () => {
   );
 };
 
-export default team;
+export default Team;

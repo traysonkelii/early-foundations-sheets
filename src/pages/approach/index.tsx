@@ -4,7 +4,7 @@ import { TextHolder } from "@/components/TextHolder";
 import { useSheetsContext } from "@/context/SheetsContext";
 import React from "react";
 
-const approach = () => {
+const Approach = () => {
   const { approachContext } = useSheetsContext();
   const multiText = approachContext.multiText;
   const button = approachContext.button;
@@ -32,4 +32,4 @@ const approach = () => {
   );
 };
 
-export default approach;
+export default Approach;
