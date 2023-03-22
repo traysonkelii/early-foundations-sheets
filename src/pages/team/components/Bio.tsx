@@ -14,3 +14,5 @@ export const Bio = ({ name, title, desc }: SheetsBioData) => {
     </div>
   );
 };
+
+export default Bio;

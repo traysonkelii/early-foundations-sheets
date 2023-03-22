@@ -55,3 +55,5 @@ export const CardItem = styled.div`
 export const CardContent = styled.div`
   font-size: 0.75rem;
 `;
+
+export default SchoolCard;
