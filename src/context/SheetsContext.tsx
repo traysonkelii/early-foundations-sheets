@@ -2,7 +2,12 @@ import { buildRangeBasePath } from "@/pages/api/sheets";
 import { SchoolState } from "@/pages/schools/components/SchoolMap";
 import { SchoolStateParser } from "@/services/SchoolStateParser";
 import { SheetsParser } from "@/services/SheetsParser";
-import { SheetsBioData, SheetsButton, SheetsSchoolCardData } from "@/services/SheetsParser/models";
+import {
+  SheetsBioData,
+  SheetsButton,
+  SheetsJobLink,
+  SheetsSchoolCardData,
+} from "@/services/SheetsParser/models";
 
 import {
   createContext,
@@ -31,6 +36,10 @@ export interface SchoolsData extends Base {
 export interface TeamData extends Base {
   bios: SheetsBioData[];
 }
+export interface CareersData extends Base {
+  subtext?: string;
+  jobs?: SheetsJobLink[];
+}
 
 export interface SheetsContext {
   homeContext: HomeData;
@@ -38,6 +47,7 @@ export interface SheetsContext {
   schoolsContext: SchoolsData;
   approachContext: ApproachData;
   teamContext: TeamData;
+  careersContext: CareersData;
 }
 
 const SheetsContext = createContext<SheetsContext>({
@@ -48,7 +58,8 @@ const SheetsContext = createContext<SheetsContext>({
     multiText: [],
     button: { displayValue: "" },
   },
-  teamContext: {bios: []},
+  teamContext: { bios: [] },
+  careersContext: { subtext: "", jobs: [] },
 });
 
 export const useSheetsContext = () => useContext<SheetsContext>(SheetsContext);
@@ -70,7 +81,11 @@ export const SheetsContextProvider = ({
     multiText: [],
     button: { displayValue: "" },
   });
-  const [teamData, setTeamData] = useState<TeamData>({bios: []});
+  const [teamData, setTeamData] = useState<TeamData>({ bios: [] });
+  const [careersData, setCareersData] = useState<CareersData>({
+    subtext: "",
+    jobs: [],
+  });
 
   useEffect(() => {
     const homeCall = fetch(buildRangeBasePath("home!A1:Z40")).then((res) =>
@@ -85,12 +100,15 @@ export const SheetsContextProvider = ({
     const approachCall = fetch(buildRangeBasePath("approach!A1:Z20")).then(
       (res) => res.json()
     );
-    const teamCall = fetch(buildRangeBasePath("team!A1:Z30")).then(
+    const teamCall = fetch(buildRangeBasePath("team!A1:Z30")).then((res) =>
+      res.json()
+    );
+    const careersCall = fetch(buildRangeBasePath("careers!A1:Z30")).then(
       (res) => res.json()
     );
 
-    Promise.all([homeCall, aboutCall, schoolCall, approachCall, teamCall]).then(
-      ([homeRes, aboutRes, schoolRes, approachRes, teamRes]) => {
+    Promise.all([homeCall, aboutCall, schoolCall, approachCall, teamCall, careersCall]).then(
+      ([homeRes, aboutRes, schoolRes, approachRes, teamRes, careersRes]) => {
         const homeContent = SheetsParser(homeRes);
         setHomeData({
           text: homeContent.text?.value,
@@ -119,16 +137,25 @@ export const SheetsContextProvider = ({
           multiText: approachContent.multiText?.value ?? [],
           bannerUrl: approachContent.banner?.imgSource,
           title: approachContent.title?.value,
-          button: approachContent.button || {displayValue: 'default button'}
+          button: approachContent.button || { displayValue: "default button" },
         });
 
         const teamContent = SheetsParser(teamRes);
-        console.log(teamRes);
         setTeamData({
           title: teamContent.title?.value,
           bannerUrl: teamContent.banner?.imgSource,
           bios: teamContent.bios ?? [],
+        });
+
+        const careersContent = SheetsParser(careersRes);
+        setCareersData({
+          title: careersContent.title?.value,
+          bannerUrl: careersContent.banner?.imgSource,
+          text: careersContent.text?.value,
+          subtext: careersContent.subtext?.value,
+          jobs: careersContent.jobs
         })
+
       }
     );
   }, []);
@@ -139,6 +166,7 @@ export const SheetsContextProvider = ({
     schoolsContext: schoolData,
     approachContext: approachData,
     teamContext: teamData,
+    careersContext: careersData
   };
 
   return (

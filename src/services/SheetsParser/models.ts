@@ -36,3 +36,8 @@ export interface SheetsBioData {
   title: string;
   desc: string[];
 }
+
+export interface SheetsJobLink {
+  title: string;
+  link: string;
+}

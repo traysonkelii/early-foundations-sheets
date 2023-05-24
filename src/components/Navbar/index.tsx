@@ -31,6 +31,16 @@ const Navbar = () => {
           <p>Our Team</p>
         </div>
       </Link>
+      <Link href="/careers" style={{ textDecoration: "none" }}>
+        <div className={styles.navbar__item}>
+          <p>Careers</p>
+        </div>
+      </Link>
+      <Link href="/contact" style={{ textDecoration: "none" }}>
+        <div className={styles.navbar__item}>
+          <p>Contact</p>
+        </div>
+      </Link>
     </header>
   );
 };

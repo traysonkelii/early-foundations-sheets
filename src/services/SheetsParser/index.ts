@@ -8,12 +8,14 @@ import {
   SheetsBannerData,
   SheetsBioData,
   SheetsButton,
+  SheetsJobLink,
   SheetsMultiTextData,
   SheetsSchoolCardData,
   SheetsTextData,
   SheetsTitleData,
 } from "./models";
 import { SheetsBioParser } from "./SheetsBioParser";
+import { SheetsJobLinkParser } from "./SheetsJobLinkParser";
 
 export interface SheetsData {
   text?: SheetsTextData;
@@ -23,11 +25,13 @@ export interface SheetsData {
   button?: SheetsButton;
   cards?: SheetsSchoolCardData[];
   bios?: SheetsBioData[];
+  jobs?: SheetsJobLink[];
+  subtext?: SheetsTextData;
 }
 
 export const SheetsParser = (sheetsData: any): SheetsData => {
   const contentArray: string[][] = sheetsData.data;
-  const content: SheetsData = { cards: [], bios: [] };
+  const content: SheetsData = { cards: [], bios: [], jobs:[] };
   if (contentArray) {
     contentArray.forEach((row) => {
       const key = row[0];
@@ -50,6 +54,13 @@ export const SheetsParser = (sheetsData: any): SheetsData => {
           break;
         case "bio":
           content.bios?.push(SheetsBioParser(row));
+          break;
+        case "subtext":
+          content.subtext = SheetsTextParser(row);
+          break;
+        case "jobLink":
+          content.jobs?.push(SheetsJobLinkParser(row));
+          break;
         default:
       }
     });
