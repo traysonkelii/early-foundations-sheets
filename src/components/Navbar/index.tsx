@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../../public/images/early.svg";
+import primrose from "../../../public/images/primrose.svg";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
@@ -8,7 +9,7 @@ const Navbar = () => {
     <header className={styles.navbar}>
       <div className={styles.navbar__title}>
         <Link href="/home">
-        <Image src={logo} alt={"SVG logo"} width={80} height={80} />
+          <Image src={logo} alt={"SVG logo"} width={80} height={80} />
         </Link>
       </div>
       <Link href="/about" style={{ textDecoration: "none" }}>
@@ -39,6 +40,11 @@ const Navbar = () => {
       <Link href="/contact" style={{ textDecoration: "none" }}>
         <div className={styles.navbar__item}>
           <p>Contact</p>
+        </div>
+      </Link>
+      <Link href="https://www.primroseschools.com/" target="_blank">
+        <div style={{marginLeft: '20px'}}>
+          <Image src={primrose} alt={"SVG logo"} width={50} height={50} />
         </div>
       </Link>
     </header>

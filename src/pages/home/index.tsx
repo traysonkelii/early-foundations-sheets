@@ -1,18 +1,17 @@
 import { Banner, BannerGradient } from "@/components/Banner";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import logo from "../../../public/images/early.svg";
-import { SheetsTextParser } from "@/services/SheetsParser/SheetsTextParser";
-import { SheetsBannerParser } from "@/services/SheetsParser/SheetsBannerParser";
+import primrose from "../../../public/images/primrose.svg";
 import { useSheetsContext } from "@/context/SheetsContext";
 import { useMediaQuery } from "react-responsive";
 
 const Home = () => {
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const { homeContext } = useSheetsContext();
-  const mainText = homeContext.text ?? '';
+  const mainText = homeContext.text ?? "";
 
   return (
     <>
@@ -24,8 +23,14 @@ const Home = () => {
         <Image src={logo} alt={"SVG logo"} width={400} height={400} />
       </Banner>
       <HomeTextHolder>
+        <div style={{ margin: "2%", marginTop: "40px" }}>
+          <Link href="https://www.primroseschools.com/" target="_blank">
+            <Image src={primrose} height={200} width={200} alt={""} />
+          </Link>
+        </div>
+
         <div style={{ textAlign: "justify" }}>
-          <p dangerouslySetInnerHTML={{__html: mainText}} />
+          <p dangerouslySetInnerHTML={{ __html: mainText }} />
         </div>
         <Link href="/about">
           <HomeButton
@@ -40,9 +45,20 @@ const Home = () => {
               }
             >
               Learn More
-            </p>
+            </p>6
           </HomeButton>
         </Link>
+        <div style={{ textAlign: "center", marginTop: "3%" }}>
+          <button>
+            <a
+              target={"_blank"}
+              href="https://www.primroseschools.com/"
+              rel={"noopener noreferrer"}
+            >
+              More about Primrose Schools
+            </a>
+          </button>
+        </div>
       </HomeTextHolder>
     </>
   );
@@ -58,9 +74,9 @@ const HomeTextHolder = styled.div`
 `;
 
 const HomeButton = styled.button`
-  color: #8cc640;
+  color: #667517;
   background-color: white;
-  border: 2px solid #8cc640;
+  border: 2px solid #667517;
   padding-left: 3em;
   padding-right: 3em;
   transition: all 0.5s;
@@ -68,7 +84,7 @@ const HomeButton = styled.button`
   font-size: large;
   &:hover {
     color: white;
-    background-color: #8cc640;
+    background-color: #667517;
     cursor: pointer;
   }
 `;
