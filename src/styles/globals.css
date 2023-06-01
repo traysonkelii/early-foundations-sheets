@@ -3,12 +3,6 @@
   src: url("../../public/fonts/OpenSans-Regular.ttf") format("truetype");
 }
 
-/* blue #10b7f1 */
-/* green #00c7b7 */
-/* pink #e4139c */
-/* grass green #8cc640 */
-/* orange #eb6b2a */
-
 @font-face {
   font-family: "Genrock-Light";
   src: url("../../public/fonts/OpenSans-Light.ttf") format("truetype");
