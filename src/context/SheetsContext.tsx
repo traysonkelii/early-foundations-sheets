@@ -25,6 +25,7 @@ export interface Base {
 
 export interface HomeData extends Base {}
 export interface AboutData extends Base {}
+export interface ContactData extends Base {}
 export interface ApproachData extends Base {
   multiText: string[];
   button: SheetsButton;
@@ -48,11 +49,13 @@ export interface SheetsContext {
   approachContext: ApproachData;
   teamContext: TeamData;
   careersContext: CareersData;
+  contactContext: ContactData;
 }
 
 const SheetsContext = createContext<SheetsContext>({
   homeContext: {},
   aboutContext: {},
+  contactContext: {},
   schoolsContext: { cards: [], schoolStates: [] },
   approachContext: {
     multiText: [],
@@ -73,6 +76,7 @@ export const SheetsContextProvider = ({
 }: SheetsContextProviderProps) => {
   const [homeData, setHomeData] = useState<HomeData>({});
   const [aboutData, setAboutData] = useState<AboutData>({});
+  const [contactData, setContactData] = useState<ContactData>({});
   const [schoolData, setSchoolData] = useState<SchoolsData>({
     cards: [],
     schoolStates: [],
@@ -106,9 +110,12 @@ export const SheetsContextProvider = ({
     const careersCall = fetch(buildRangeBasePath("careers!A1:Z30")).then(
       (res) => res.json()
     );
+    const contactCall = fetch(buildRangeBasePath("contact!A1:Z10")).then(
+      (res) => res.json()
+    );
 
-    Promise.all([homeCall, aboutCall, schoolCall, approachCall, teamCall, careersCall]).then(
-      ([homeRes, aboutRes, schoolRes, approachRes, teamRes, careersRes]) => {
+    Promise.all([homeCall, aboutCall, schoolCall, approachCall, teamCall, careersCall, contactCall]).then(
+      ([homeRes, aboutRes, schoolRes, approachRes, teamRes, careersRes, contactRes]) => {
         const homeContent = SheetsParser(homeRes);
         setHomeData({
           text: homeContent.text?.value,
@@ -154,8 +161,13 @@ export const SheetsContextProvider = ({
           text: careersContent.text?.value,
           subtext: careersContent.subtext?.value,
           jobs: careersContent.jobs
-        })
+        });
 
+        const contactContent = SheetsParser(contactRes);
+        setContactData({
+          title: contactContent.title?.value,
+          bannerUrl: contactContent.banner?.imgSource
+        })
       }
     );
   }, []);
@@ -166,7 +178,8 @@ export const SheetsContextProvider = ({
     schoolsContext: schoolData,
     approachContext: approachData,
     teamContext: teamData,
-    careersContext: careersData
+    careersContext: careersData,
+    contactContext: contactData
   };
 
   return (

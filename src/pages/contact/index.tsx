@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import { Banner, BannerGradient } from "@/components/Banner";
+import { HeaderText } from "@/components/HeaderText";
+import { TextHolder } from "@/components/TextHolder";
+import { useSheetsContext } from "@/context/SheetsContext";
+import React, { useState } from "react";
+import styled from "styled-components";
 
 type FormDataType = {
   subject: string;
@@ -38,10 +42,11 @@ const StyledButton = styled.button`
 `;
 
 const ContactForm: React.FC = () => {
+  const { contactContext } = useSheetsContext();
   const [formData, setFormData] = useState<FormDataType>({
-    subject: '',
-    message: '',
-    email: '',
+    subject: "",
+    message: "",
+    email: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,43 +55,54 @@ const ContactForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Subject: ${formData.subject}, Message: ${formData.message}, Email: ${formData.email}`);
+    alert(
+      `Subject: ${formData.subject}, Message: ${formData.message}, Email: ${formData.email}`
+    );
   };
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
-      <StyledLabel>
-        Subject:
-        <StyledInput
-          type="text"
-          name="subject"
-          value={formData.subject}
-          onChange={handleInputChange}
-          required
-        />
-      </StyledLabel>
-      <StyledLabel>
-        Message:
-        <StyledInput
-          type="text"
-          name="message"
-          value={formData.message}
-          onChange={handleInputChange}
-          required
-        />
-      </StyledLabel>
-      <StyledLabel>
-        Email:
-        <StyledInput
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          required
-        />
-      </StyledLabel>
-      <StyledButton type="submit">Submit</StyledButton>
-    </StyledForm>
+    <>
+      <Banner
+        backgroundUrl={contactContext.bannerUrl}
+        gradient={BannerGradient.toLight}
+      />
+      <TextHolder>
+        <HeaderText>{contactContext.title}</HeaderText>
+        <StyledForm onSubmit={handleSubmit}>
+          <StyledLabel>
+            Subject:
+            <StyledInput
+              type="text"
+              name="subject"
+              value={formData.subject}
+              onChange={handleInputChange}
+              required
+            />
+          </StyledLabel>
+          <StyledLabel>
+            Message:
+            <StyledInput
+              type="text"
+              name="message"
+              value={formData.message}
+              onChange={handleInputChange}
+              required
+            />
+          </StyledLabel>
+          <StyledLabel>
+            Email:
+            <StyledInput
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+            />
+          </StyledLabel>
+          <StyledButton type="submit">Submit</StyledButton>
+        </StyledForm>
+      </TextHolder>
+    </>
   );
 };
 
