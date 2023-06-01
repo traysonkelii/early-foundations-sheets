@@ -45,7 +45,7 @@ const Home = () => {
               }
             >
               Learn More
-            </p>6
+            </p>
           </HomeButton>
         </Link>
         <div style={{ textAlign: "center", marginTop: "3%" }}>
