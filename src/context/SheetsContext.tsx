@@ -50,6 +50,15 @@ export interface SheetsContext {
   teamContext: TeamData;
   careersContext: CareersData;
   contactContext: ContactData;
+  writeToForm: ({
+    email,
+    subject,
+    message,
+  }: {
+    email: string;
+    subject: string;
+    message: string;
+  }) => object;
 }
 
 const SheetsContext = createContext<SheetsContext>({
@@ -63,6 +72,7 @@ const SheetsContext = createContext<SheetsContext>({
   },
   teamContext: { bios: [] },
   careersContext: { subtext: "", jobs: [] },
+  writeToForm: () => [],
 });
 
 export const useSheetsContext = () => useContext<SheetsContext>(SheetsContext);
@@ -91,6 +101,32 @@ export const SheetsContextProvider = ({
     jobs: [],
   });
 
+  const wrtieToForm = async ({
+    email,
+    subject,
+    message,
+  }: {
+    email: string;
+    subject: string;
+    message: string;
+  }) => {
+    const body = { email, subject, message };
+    try {
+      await fetch(`/api/sheets`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }).then((res) => {
+        return res.json();
+      });
+    } catch (error) {
+      throw new Error("Error with write: " + error);
+    }
+  };
+
   useEffect(() => {
     const homeCall = fetch(buildRangeBasePath("home!A1:Z40")).then((res) =>
       res.json()
@@ -114,8 +150,24 @@ export const SheetsContextProvider = ({
       (res) => res.json()
     );
 
-    Promise.all([homeCall, aboutCall, schoolCall, approachCall, teamCall, careersCall, contactCall]).then(
-      ([homeRes, aboutRes, schoolRes, approachRes, teamRes, careersRes, contactRes]) => {
+    Promise.all([
+      homeCall,
+      aboutCall,
+      schoolCall,
+      approachCall,
+      teamCall,
+      careersCall,
+      contactCall,
+    ]).then(
+      ([
+        homeRes,
+        aboutRes,
+        schoolRes,
+        approachRes,
+        teamRes,
+        careersRes,
+        contactRes,
+      ]) => {
         const homeContent = SheetsParser(homeRes);
         setHomeData({
           text: homeContent.text?.value,
@@ -160,14 +212,14 @@ export const SheetsContextProvider = ({
           bannerUrl: careersContent.banner?.imgSource,
           text: careersContent.text?.value,
           subtext: careersContent.subtext?.value,
-          jobs: careersContent.jobs
+          jobs: careersContent.jobs,
         });
 
         const contactContent = SheetsParser(contactRes);
         setContactData({
           title: contactContent.title?.value,
-          bannerUrl: contactContent.banner?.imgSource
-        })
+          bannerUrl: contactContent.banner?.imgSource,
+        });
       }
     );
   }, []);
@@ -179,7 +231,8 @@ export const SheetsContextProvider = ({
     approachContext: approachData,
     teamContext: teamData,
     careersContext: careersData,
-    contactContext: contactData
+    contactContext: contactData,
+    writeToForm: wrtieToForm,
   };
 
   return (

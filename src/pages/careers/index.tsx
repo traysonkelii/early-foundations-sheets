@@ -2,12 +2,9 @@ import { Banner, BannerGradient } from "@/components/Banner";
 import { HeaderText } from "@/components/HeaderText";
 import { TextHolder } from "@/components/TextHolder";
 import { useSheetsContext } from "@/context/SheetsContext";
-import styled from "styled-components";
 
 const Careers = () => {
   const { careersContext } = useSheetsContext();
-
-  console.log(careersContext);
 
   return (
     <>

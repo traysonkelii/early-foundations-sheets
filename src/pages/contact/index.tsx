@@ -42,7 +42,7 @@ const StyledButton = styled.button`
 `;
 
 const ContactForm: React.FC = () => {
-  const { contactContext } = useSheetsContext();
+  const { contactContext, writeToForm } = useSheetsContext();
   const [formData, setFormData] = useState<FormDataType>({
     subject: "",
     message: "",
@@ -53,11 +53,18 @@ const ContactForm: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(
-      `Subject: ${formData.subject}, Message: ${formData.message}, Email: ${formData.email}`
-    );
+    writeToForm({
+      email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+    });
+    setFormData({
+      subject: "",
+      message: "",
+      email: "",
+    });
   };
 
   return (
