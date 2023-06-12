@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = process.env.API_URL || 'https://example.com';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://example.com';
 
 export const sheetsService = async (req: any, res: any, range: string) => {
   const queryString = range && range.length > 1 ? `?range=${range}` : "";
