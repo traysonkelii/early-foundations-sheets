@@ -48,6 +48,7 @@ const ContactForm: React.FC = () => {
     message: "",
     email: "",
   });
+  const [confirmationMessage, setConfirmationMessage] = useState<string>('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -55,16 +56,27 @@ const ContactForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    writeToForm({
-      email: formData.email,
-      subject: formData.subject,
-      message: formData.message,
-    });
-    setFormData({
-      subject: "",
-      message: "",
-      email: "",
-    });
+
+    try {
+      writeToForm({
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      }); 
+
+      setFormData({
+        subject: "",
+        message: "",
+        email: "",
+      });
+
+      setConfirmationMessage('Thank you for your feedback!');
+    } catch (error) {
+      setConfirmationMessage('Error with your submission, try again later');
+      console.log("Error in from submission: " + error);
+    }
+
+    
   };
 
   return (
@@ -108,6 +120,7 @@ const ContactForm: React.FC = () => {
           </StyledLabel>
           <StyledButton type="submit">Submit</StyledButton>
         </StyledForm>
+        <p>{confirmationMessage}</p>
       </TextHolder>
     </>
   );
