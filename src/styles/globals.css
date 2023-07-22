@@ -92,3 +92,70 @@ a, a:hover, a:focus, a:active {
   text-decoration: none;
   color: inherit;
 }
+
+#humans,
+#yellows,
+#primrose,
+#oranges,
+#rainbow,
+#foundations,
+#floor,
+#early {
+  transition: all 1s ease;
+}
+
+#foundations,
+#early {
+  animation: fadeInUp 1s;
+}
+
+#primrose {
+  animation: fadeInUp 2s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+#humans, #yellows, #oranges, #floor, #rainbow {
+  opacity: 0;
+  animation: dropIn 4s ease forwards infinite;
+  animation-delay: calc(var(--order) * 200ms);
+}
+
+@keyframes dropIn {
+  20% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+
+  30%, 90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+}
+
+svg:hover #humans,
+svg:hover #yellows,
+svg:hover #primrose,
+svg:hover #oranges,
+svg:hover #rainbow,
+svg:hover #foundations,
+svg:hover #floor,
+svg:hover #early {
+  opacity: 1;
+  transform: translateY(0%);
+}

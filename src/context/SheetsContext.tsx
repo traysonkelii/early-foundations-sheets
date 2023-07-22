@@ -59,6 +59,7 @@ export interface SheetsContext {
     subject: string;
     message: string;
   }) => object;
+  isLoading: boolean;
 }
 
 const SheetsContext = createContext<SheetsContext>({
@@ -73,6 +74,7 @@ const SheetsContext = createContext<SheetsContext>({
   teamContext: { bios: [] },
   careersContext: { subtext: "", jobs: [] },
   writeToForm: () => [],
+  isLoading: true
 });
 
 export const useSheetsContext = () => useContext<SheetsContext>(SheetsContext);
@@ -100,6 +102,7 @@ export const SheetsContextProvider = ({
     subtext: "",
     jobs: [],
   });
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const wrtieToForm = async ({
     email,
@@ -128,6 +131,7 @@ export const SheetsContextProvider = ({
   };
 
   useEffect(() => {
+    setIsLoading(true);
     const homeCall = fetch(buildRangeBasePath("home!A1:Z40")).then((res) =>
       res.json()
     );
@@ -220,6 +224,8 @@ export const SheetsContextProvider = ({
           title: contactContent.title?.value,
           bannerUrl: contactContent.banner?.imgSource,
         });
+
+        setIsLoading(false);
       }
     );
   }, []);
@@ -233,6 +239,7 @@ export const SheetsContextProvider = ({
     careersContext: careersData,
     contactContext: contactData,
     writeToForm: wrtieToForm,
+    isLoading
   };
 
   return (
