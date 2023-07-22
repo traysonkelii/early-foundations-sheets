@@ -4,8 +4,8 @@ export const Loader = () => {
   return (
     <LoaderContainer>
       <svg
-        width="500"
-        height="500"
+        width="400"
+        height="400"
         viewBox="0 0 500 500"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
