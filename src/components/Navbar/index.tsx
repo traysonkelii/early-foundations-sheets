@@ -74,7 +74,7 @@ const Navbar = () => {
 
       <div className={styles.navbar__mobile}>
         <div>
-          <Link href="/" onClick={() => handleMobileClick()}>
+          <Link href="/home" onClick={() => handleMobileClick()}>
           <Image src={logo} alt={"SVG logo"} height={50} width={50} />
           </Link>
         </div>
@@ -95,7 +95,7 @@ const Navbar = () => {
             </div>
           </Link>
           <Link
-            href="/our-schools"
+            href="/schools"
             style={{ textDecoration: "none" }}
             onClick={() => handleMobileClick()}
           >
@@ -104,7 +104,7 @@ const Navbar = () => {
             </div>
           </Link>
           <Link
-            href="/our-approach"
+            href="/approach"
             style={{ textDecoration: "none" }}
             onClick={() => handleMobileClick()}
           >
@@ -122,7 +122,7 @@ const Navbar = () => {
             </div>
           </Link>
           <Link
-            href="/career"
+            href="/careers"
             style={{ textDecoration: "none" }}
             onClick={() => handleMobileClick()}
           >
