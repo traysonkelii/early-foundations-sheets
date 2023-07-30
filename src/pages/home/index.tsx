@@ -17,7 +17,9 @@ const Home = () => {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <div style={{textAlign: "center"}}>
+          <Loader />
+        </div>
       ) : (
         <>
           <Banner
