@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function Layout({ children }: Props) {
-  const { homeContext, isLoading } = useSheetsContext();
+  const { isLoading } = useSheetsContext();
 
   return (
     <>

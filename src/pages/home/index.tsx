@@ -7,11 +7,10 @@ import logo from "../../../public/images/early.svg";
 import primrose from "../../../public/images/primrose.svg";
 import { useSheetsContext } from "@/context/SheetsContext";
 import { useMediaQuery } from "react-responsive";
-import { Loader } from "@/components/Loader";
 
 const Home = () => {
   const isMobile = useMediaQuery({ maxWidth: 900 });
-  const { homeContext, isLoading } = useSheetsContext();
+  const { homeContext } = useSheetsContext();
   const mainText = homeContext.text ?? "";
 
   return (
@@ -22,12 +21,12 @@ const Home = () => {
           height={"500px"}
           gradient={BannerGradient.toVeryLight}
         >
-          <Image src={logo} alt={"SVG logo"} width={400} height={400} />
+          <Image src={logo} alt={"SVG logo"} width={isMobile ? 170 : 400} height={400} />
         </Banner>
         <HomeTextHolder>
           <div style={{ margin: "2%", marginTop: "40px" }}>
             <Link href="https://www.primroseschools.com/" target="_blank">
-              <Image src={primrose} height={200} width={200} alt={""} />
+              <Image src={primrose} height={200} width={isMobile ? 150 : 200} alt={""} />
             </Link>
           </div>
 

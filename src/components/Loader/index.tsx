@@ -1,10 +1,14 @@
+import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 
 export const Loader = () => {
+
+  const isMobile = useMediaQuery({ maxWidth: 900 });
+
   return (
     <LoaderContainer>
       <svg
-        width="400"
+        width={isMobile ? 170 : 400}
         height="400"
         viewBox="0 0 500 500"
         fill="none"

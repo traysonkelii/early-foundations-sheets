@@ -22,7 +22,7 @@ export const Banner = ({
   height = "500px",
   gradient = BannerGradient.none,
   children,
-  backgroundAttachment = 'fixed'
+  backgroundAttachment = "fixed",
 }: BannerProps) => {
   const { gradientStart, gradientEnd, gradientColor } = getGradient(gradient);
 
@@ -67,6 +67,12 @@ const BannerImage = styled.div<BannerImageProps>`
   justify-content: center;
   text-align: center;
   background-attachment: ${(props) => props.backgroundAttachment};
+  @media all and (max-width: 900px) {
+    height: 200px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+  }
 `;
 
 const getGradient = (bannerGradient: BannerGradient) => {
