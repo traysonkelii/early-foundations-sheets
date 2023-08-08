@@ -41,6 +41,9 @@ export interface CareersData extends Base {
   subtext?: string;
   jobs?: SheetsJobLink[];
 }
+export interface DynamicTabs {
+  [x: string]: ReactNode;
+}
 
 export interface SheetsContext {
   homeContext: HomeData;
@@ -60,6 +63,7 @@ export interface SheetsContext {
     message: string;
   }) => object;
   isLoading: boolean;
+  tabs: DynamicTabs;
 }
 
 const SheetsContext = createContext<SheetsContext>({
@@ -74,7 +78,8 @@ const SheetsContext = createContext<SheetsContext>({
   teamContext: { bios: [] },
   careersContext: { subtext: "", jobs: [] },
   writeToForm: () => [],
-  isLoading: true
+  isLoading: true,
+  tabs: {}
 });
 
 export const useSheetsContext = () => useContext<SheetsContext>(SheetsContext);
@@ -103,6 +108,7 @@ export const SheetsContextProvider = ({
     jobs: [],
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [tabs, setTabs] = useState({})
 
   const wrtieToForm = async ({
     email,
@@ -132,25 +138,25 @@ export const SheetsContextProvider = ({
 
   useEffect(() => {
     setIsLoading(true);
-    const homeCall = fetch(buildRangeBasePath("home!A1:Z40")).then((res) =>
+    const homeCall = fetch(buildRangeBasePath("home!A1:Z60")).then((res) =>
       res.json()
     );
-    const aboutCall = fetch(buildRangeBasePath("about!A1:E6")).then((res) =>
+    const aboutCall = fetch(buildRangeBasePath("tab1!A1:Z60")).then((res) =>
       res.json()
     );
-    const schoolCall = fetch(buildRangeBasePath("our-schools!A1:Z60")).then(
+    const schoolCall = fetch(buildRangeBasePath("tab2!A1:Z60")).then(
       (res) => res.json()
     );
-    const approachCall = fetch(buildRangeBasePath("approach!A1:Z20")).then(
+    const approachCall = fetch(buildRangeBasePath("tab3!A1:Z60")).then(
       (res) => res.json()
     );
-    const teamCall = fetch(buildRangeBasePath("team!A1:Z30")).then((res) =>
+    const teamCall = fetch(buildRangeBasePath("tab4!A1:Z60")).then((res) =>
       res.json()
     );
-    const careersCall = fetch(buildRangeBasePath("careers!A1:Z30")).then(
+    const careersCall = fetch(buildRangeBasePath("tab5!A1:Z60")).then(
       (res) => res.json()
     );
-    const contactCall = fetch(buildRangeBasePath("contact!A1:Z10")).then(
+    const contactCall = fetch(buildRangeBasePath("tab6!A1:Z60")).then(
       (res) => res.json()
     );
 
@@ -172,6 +178,7 @@ export const SheetsContextProvider = ({
         careersRes,
         contactRes,
       ]) => {
+
         const homeContent = SheetsParser(homeRes);
         setHomeData({
           text: homeContent.text?.value,
@@ -225,6 +232,15 @@ export const SheetsContextProvider = ({
           bannerUrl: contactContent.banner?.imgSource,
         });
 
+        setTabs({
+          tab1: aboutContent.tabName,
+          tab2: schoolContent.tabName,
+          tab3: approachContent.tabName,
+          tab4: teamContent.tabName,
+          tab5: careersContent.tabName,
+          tab6: contactContent.tabName
+        })
+
         setIsLoading(false);
       }
     );
@@ -239,7 +255,8 @@ export const SheetsContextProvider = ({
     careersContext: careersData,
     contactContext: contactData,
     writeToForm: wrtieToForm,
-    isLoading
+    isLoading,
+    tabs
   };
 
   return (

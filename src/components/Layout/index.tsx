@@ -13,15 +13,17 @@ export default function Layout({ children }: Props) {
 
   return (
     <>
-      <Navbar />
       {isLoading ? (
-        <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: "center", marginTop: "5%" }}>
           <Loader />
         </div>
       ) : (
-        <main>{children}</main>
+        <>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </>
       )}
-      <Footer />
     </>
   );
 }

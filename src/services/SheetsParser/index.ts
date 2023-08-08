@@ -16,6 +16,7 @@ import {
 } from "./models";
 import { SheetsBioParser } from "./SheetsBioParser";
 import { SheetsJobLinkParser } from "./SheetsJobLinkParser";
+import { SheetsTabParser } from "./SheetsTabNameParser";
 
 export interface SheetsData {
   text?: SheetsTextData;
@@ -27,6 +28,7 @@ export interface SheetsData {
   bios?: SheetsBioData[];
   jobs?: SheetsJobLink[];
   subtext?: SheetsTextData;
+  tabName?: string;
 }
 
 export const SheetsParser = (sheetsData: any): SheetsData => {
@@ -61,6 +63,8 @@ export const SheetsParser = (sheetsData: any): SheetsData => {
         case "jobLink":
           content.jobs?.push(SheetsJobLinkParser(row));
           break;
+        case "tabName":
+          content.tabName = SheetsTabParser(row);
         default:
       }
     });
