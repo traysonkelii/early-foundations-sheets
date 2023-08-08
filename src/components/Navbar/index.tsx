@@ -6,6 +6,7 @@ import styles from "./Navbar.module.css";
 import { useMediaQuery } from "react-responsive";
 import { useState } from "react";
 import Burger from "../Burger";
+import { useSheetsContext } from "@/context/SheetsContext";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -14,6 +15,7 @@ const Navbar = () => {
     setOpen(false);
     window.scrollTo(0, 0);
   };
+  const { tabs } = useSheetsContext();
 
   return (
     <header className={styles.navbar}>
@@ -25,42 +27,42 @@ const Navbar = () => {
       {!isMobile && (
         <Link href="/about" style={{ textDecoration: "none" }}>
           <div className={styles.navbar__item}>
-            <p>About</p>
+            <p>{tabs.tab1}</p>
           </div>
         </Link>
       )}
       {!isMobile && (
         <Link href="/schools" style={{ textDecoration: "none" }}>
           <div className={styles.navbar__item}>
-            <p>Our Schools</p>
+          <p>{tabs.tab2}</p>
           </div>
         </Link>
       )}
       {!isMobile && (
         <Link href="/approach" style={{ textDecoration: "none" }}>
           <div className={styles.navbar__item}>
-            <p>Our Approach</p>
+          <p>{tabs.tab3}</p>
           </div>
         </Link>
       )}
       {!isMobile && (
         <Link href="/team" style={{ textDecoration: "none" }}>
           <div className={styles.navbar__item}>
-            <p>Our Team</p>
+          <p>{tabs.tab4}</p>
           </div>
         </Link>
       )}
       {!isMobile && (
         <Link href="/careers" style={{ textDecoration: "none" }}>
           <div className={styles.navbar__item}>
-            <p>Careers</p>
+          <p>{tabs.tab5}</p>
           </div>
         </Link>
       )}
       {!isMobile && (
         <Link href="/contact" style={{ textDecoration: "none" }}>
           <div className={styles.navbar__item}>
-            <p>Contact</p>
+          <p>{tabs.tab6}</p>
           </div>
         </Link>
       )}
@@ -75,7 +77,7 @@ const Navbar = () => {
       <div className={styles.navbar__mobile}>
         <div>
           <Link href="/home" onClick={() => handleMobileClick()}>
-          <Image src={logo} alt={"SVG logo"} height={50} width={50} />
+            <Image src={logo} alt={"SVG logo"} height={50} width={50} />
           </Link>
         </div>
 
@@ -91,7 +93,7 @@ const Navbar = () => {
             onClick={() => handleMobileClick()}
           >
             <div className={styles.navbar__item}>
-              <p>About Us</p>
+            <p>{tabs.tab1}</p>
             </div>
           </Link>
           <Link
@@ -100,7 +102,7 @@ const Navbar = () => {
             onClick={() => handleMobileClick()}
           >
             <div className={styles.navbar__item}>
-              <p>Our Schools</p>
+            <p>{tabs.tab2}</p>
             </div>
           </Link>
           <Link
@@ -109,7 +111,7 @@ const Navbar = () => {
             onClick={() => handleMobileClick()}
           >
             <div className={styles.navbar__item}>
-              <p>Our Approach</p>
+            <p>{tabs.tab3}</p>
             </div>
           </Link>
           <Link
@@ -118,7 +120,7 @@ const Navbar = () => {
             onClick={() => handleMobileClick()}
           >
             <div className={styles.navbar__item}>
-              <p>Our Team</p>
+            <p>{tabs.tab4}</p>
             </div>
           </Link>
           <Link
@@ -127,7 +129,7 @@ const Navbar = () => {
             onClick={() => handleMobileClick()}
           >
             <div className={styles.navbar__item}>
-              <p>Careers</p>
+            <p>{tabs.tab5}</p>
             </div>
           </Link>
           <Link
@@ -136,7 +138,7 @@ const Navbar = () => {
             onClick={() => handleMobileClick()}
           >
             <div className={styles.navbar__item}>
-              <p>Contact</p>
+            <p>{tabs.tab6}</p>
             </div>
           </Link>
         </div>
