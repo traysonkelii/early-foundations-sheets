@@ -29,11 +29,12 @@ export interface SheetsData {
   jobs?: SheetsJobLink[];
   subtext?: SheetsTextData;
   tabName?: string;
+  subHeaders?: string[];
 }
 
 export const SheetsParser = (sheetsData: any): SheetsData => {
   const contentArray: string[][] = sheetsData.data;
-  const content: SheetsData = { cards: [], bios: [], jobs:[] };
+  const content: SheetsData = { cards: [], bios: [], jobs:[], subHeaders: [] };
   if (contentArray) {
     contentArray.forEach((row) => {
       const key = row[0];
@@ -65,6 +66,8 @@ export const SheetsParser = (sheetsData: any): SheetsData => {
           break;
         case "tabName":
           content.tabName = SheetsTabParser(row);
+        case "subHeader": 
+          content.subHeaders = SheetsMultiTextParser(row).value;
         default:
       }
     });

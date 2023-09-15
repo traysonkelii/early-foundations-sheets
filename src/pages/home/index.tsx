@@ -15,53 +15,61 @@ const Home = () => {
 
   return (
     <>
-      <>
-        <Banner
-          backgroundUrl={homeContext.bannerUrl}
-          height={"500px"}
-          gradient={BannerGradient.toVeryLight}
-        >
-          <Image src={logo} alt={"SVG logo"} width={isMobile ? 170 : 400} height={400} />
-        </Banner>
-        <HomeTextHolder>
-          <div style={{ margin: "2%", marginTop: "40px" }}>
-            <Link href="https://www.primroseschools.com/" target="_blank">
-              <Image src={primrose} height={200} width={isMobile ? 150 : 200} alt={""} />
-            </Link>
-          </div>
-
-          <div style={{ textAlign: "justify" }}>
-            <p dangerouslySetInnerHTML={{ __html: mainText }} />
-          </div>
-          <Link href="/about">
-            <HomeButton
-              onClick={() => window.scrollTo(0, 0)}
-              style={{ marginTop: "10%" }}
-            >
-              <p
-                style={
-                  isMobile
-                    ? { margin: 0, padding: 0, fontSize: "small" }
-                    : { margin: 0, padding: 0, fontSize: "large" }
-                }
-              >
-                Learn More
-              </p>
-            </HomeButton>
+      <Banner
+        backgroundUrl={homeContext.bannerUrl}
+        height={"500px"}
+        gradient={BannerGradient.toVeryLight}
+      >
+        <Image
+          src={logo}
+          alt={"SVG logo"}
+          width={isMobile ? 170 : 400}
+          height={400}
+        />
+      </Banner>
+      <HomeTextHolder>
+        <div style={{ margin: "2%", marginTop: "40px" }}>
+          <Link href="https://www.primroseschools.com/" target="_blank">
+            <Image
+              src={primrose}
+              height={200}
+              width={isMobile ? 150 : 200}
+              alt={""}
+            />
           </Link>
-          <div style={{ textAlign: "center", marginTop: "3%" }}>
-            <button>
-              <a
-                target={"_blank"}
-                href="https://www.primroseschools.com/"
-                rel={"noopener noreferrer"}
-              >
-                More about Primrose Schools
-              </a>
-            </button>
-          </div>
-        </HomeTextHolder>
-      </>
+        </div>
+
+        <div style={{ textAlign: "justify" }}>
+          <p dangerouslySetInnerHTML={{ __html: mainText }} />
+        </div>
+        <Link href="/about">
+          <HomeButton
+            onClick={() => window.scrollTo(0, 0)}
+            style={{ marginTop: "10%" }}
+          >
+            <p
+              style={
+                isMobile
+                  ? { margin: 0, padding: 0, fontSize: "small" }
+                  : { margin: 0, padding: 0, fontSize: "large" }
+              }
+            >
+              Learn More
+            </p>
+          </HomeButton>
+        </Link>
+        <div style={{ textAlign: "center", marginTop: "3%" }}>
+          <button>
+            <a
+              target={"_blank"}
+              href="https://www.primroseschools.com/"
+              rel={"noopener noreferrer"}
+            >
+              More about Primrose Schools
+            </a>
+          </button>
+        </div>
+      </HomeTextHolder>
     </>
   );
 };
