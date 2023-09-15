@@ -43,12 +43,18 @@ const StyledButton = styled.button`
 
 const ContactForm: React.FC = () => {
   const { contactContext, writeToForm } = useSheetsContext();
+
+  const button = contactContext.button;
+  const buttonUrl = button.link ?? '';
+
   const [formData, setFormData] = useState<FormDataType>({
     subject: "",
     message: "",
     email: "",
   });
   const [confirmationMessage, setConfirmationMessage] = useState<string>('');
+
+  console.log(contactContext);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -87,6 +93,12 @@ const ContactForm: React.FC = () => {
       />
       <TextHolder>
         <HeaderText>{contactContext.title}</HeaderText>
+        <h2>{contactContext.subHeaders[0]} </h2>
+        <div>{contactContext.text}</div>
+        <button style={{marginTop: '2%'}}>
+          <a target={"_blank"} href={buttonUrl} rel={"noopener noreferrer"} dangerouslySetInnerHTML={{__html: button.displayValue}} />
+        </button>
+        <h2>{contactContext.subHeaders[1]}</h2>
         <StyledForm onSubmit={handleSubmit}>
           <StyledLabel>
             Subject:

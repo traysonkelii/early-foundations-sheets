@@ -25,7 +25,10 @@ export interface Base {
 
 export interface HomeData extends Base {}
 export interface AboutData extends Base {}
-export interface ContactData extends Base {}
+export interface ContactData extends Base {
+  subHeaders: string[];
+  button: SheetsButton;
+}
 export interface ApproachData extends Base {
   multiText: string[];
   button: SheetsButton;
@@ -69,7 +72,10 @@ export interface SheetsContext {
 const SheetsContext = createContext<SheetsContext>({
   homeContext: {},
   aboutContext: {},
-  contactContext: {},
+  contactContext: {
+    subHeaders: [],
+    button: { displayValue: "" },
+  },
   schoolsContext: { cards: [], schoolStates: [] },
   approachContext: {
     multiText: [],
@@ -79,7 +85,7 @@ const SheetsContext = createContext<SheetsContext>({
   careersContext: { subtext: "", jobs: [] },
   writeToForm: () => [],
   isLoading: true,
-  tabs: {}
+  tabs: {},
 });
 
 export const useSheetsContext = () => useContext<SheetsContext>(SheetsContext);
@@ -93,7 +99,10 @@ export const SheetsContextProvider = ({
 }: SheetsContextProviderProps) => {
   const [homeData, setHomeData] = useState<HomeData>({});
   const [aboutData, setAboutData] = useState<AboutData>({});
-  const [contactData, setContactData] = useState<ContactData>({});
+  const [contactData, setContactData] = useState<ContactData>({
+    subHeaders: [],
+    button: { displayValue: "" },
+  });
   const [schoolData, setSchoolData] = useState<SchoolsData>({
     cards: [],
     schoolStates: [],
@@ -108,7 +117,7 @@ export const SheetsContextProvider = ({
     jobs: [],
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [tabs, setTabs] = useState({})
+  const [tabs, setTabs] = useState({});
 
   const wrtieToForm = async ({
     email,
@@ -144,20 +153,20 @@ export const SheetsContextProvider = ({
     const aboutCall = fetch(buildRangeBasePath("tab1!A1:Z60")).then((res) =>
       res.json()
     );
-    const schoolCall = fetch(buildRangeBasePath("tab2!A1:Z60")).then(
-      (res) => res.json()
+    const schoolCall = fetch(buildRangeBasePath("tab2!A1:Z60")).then((res) =>
+      res.json()
     );
-    const approachCall = fetch(buildRangeBasePath("tab3!A1:Z60")).then(
-      (res) => res.json()
+    const approachCall = fetch(buildRangeBasePath("tab3!A1:Z60")).then((res) =>
+      res.json()
     );
     const teamCall = fetch(buildRangeBasePath("tab4!A1:Z60")).then((res) =>
       res.json()
     );
-    const careersCall = fetch(buildRangeBasePath("tab5!A1:Z60")).then(
-      (res) => res.json()
+    const careersCall = fetch(buildRangeBasePath("tab5!A1:Z60")).then((res) =>
+      res.json()
     );
-    const contactCall = fetch(buildRangeBasePath("tab6!A1:Z60")).then(
-      (res) => res.json()
+    const contactCall = fetch(buildRangeBasePath("tab6!A1:Z60")).then((res) =>
+      res.json()
     );
 
     Promise.all([
@@ -178,7 +187,6 @@ export const SheetsContextProvider = ({
         careersRes,
         contactRes,
       ]) => {
-
         const homeContent = SheetsParser(homeRes);
         setHomeData({
           text: homeContent.text?.value,
@@ -230,6 +238,9 @@ export const SheetsContextProvider = ({
         setContactData({
           title: contactContent.title?.value,
           bannerUrl: contactContent.banner?.imgSource,
+          subHeaders: contactContent.subHeaders ?? [],
+          text: contactContent.text?.value,
+          button: contactContent.button || { displayValue: "default button" },
         });
 
         setTabs({
@@ -238,8 +249,8 @@ export const SheetsContextProvider = ({
           tab3: approachContent.tabName,
           tab4: teamContent.tabName,
           tab5: careersContent.tabName,
-          tab6: contactContent.tabName
-        })
+          tab6: contactContent.tabName,
+        });
 
         setIsLoading(false);
       }
@@ -256,7 +267,7 @@ export const SheetsContextProvider = ({
     contactContext: contactData,
     writeToForm: wrtieToForm,
     isLoading,
-    tabs
+    tabs,
   };
 
   return (
