@@ -98,7 +98,7 @@ const ContactForm: React.FC = () => {
         <button style={{marginTop: '2%'}}>
           <a target={"_blank"} href={buttonUrl} rel={"noopener noreferrer"} dangerouslySetInnerHTML={{__html: button.displayValue}} />
         </button>
-        <h2>{contactContext.subHeaders[1]}</h2>
+        {/* <h2>{contactContext.subHeaders[1]}</h2>
         <StyledForm onSubmit={handleSubmit}>
           <StyledLabel>
             Subject:
@@ -132,7 +132,7 @@ const ContactForm: React.FC = () => {
           </StyledLabel>
           <StyledButton type="submit">Submit</StyledButton>
         </StyledForm>
-        <p>{confirmationMessage}</p>
+        <p>{confirmationMessage}</p> */}
       </TextHolder>
     </>
   );
