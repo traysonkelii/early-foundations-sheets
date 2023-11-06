@@ -7,6 +7,7 @@ const ENV = process.env.NEXT_PUBLIC_ENV || "dev";
 export const sheetsService = async (req: any, res: any, range: string) => {
   let queryString;
   let response;
+  // PK's are used in DDB instead of range query
   if (ENV === "dev") {
     queryString = range && range.length > 1 ? `?range=${range}` : "";
   } else {
