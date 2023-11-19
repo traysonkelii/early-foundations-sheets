@@ -8,13 +8,14 @@ const Approach = () => {
   const { approachContext } = useSheetsContext();
   const multiText = approachContext.multiText;
   const button = approachContext.button;
-  const buttonUrl = button.link ?? '';
-  
+  const buttonUrl = button.link ?? "";
+
   return (
     <>
       <Banner
         backgroundUrl={approachContext.bannerUrl}
         gradient={BannerGradient.toLight}
+        backgroundSize={"contain"}
       />
       <TextHolder>
         <HeaderText>{approachContext.title}</HeaderText>
@@ -25,7 +26,12 @@ const Approach = () => {
             ))}
         </div>
         <button>
-          <a target={"_blank"} href={buttonUrl} rel={"noopener noreferrer"} dangerouslySetInnerHTML={{__html: button.displayValue}} />
+          <a
+            target={"_blank"}
+            href={buttonUrl}
+            rel={"noopener noreferrer"}
+            dangerouslySetInnerHTML={{ __html: button.displayValue }}
+          />
         </button>
       </TextHolder>
     </>

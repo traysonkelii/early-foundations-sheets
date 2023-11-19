@@ -45,14 +45,14 @@ const ContactForm: React.FC = () => {
   const { contactContext, writeToForm } = useSheetsContext();
 
   const button = contactContext.button;
-  const buttonUrl = button.link ?? '';
+  const buttonUrl = button.link ?? "";
 
   const [formData, setFormData] = useState<FormDataType>({
     subject: "",
     message: "",
     email: "",
   });
-  const [confirmationMessage, setConfirmationMessage] = useState<string>('');
+  const [confirmationMessage, setConfirmationMessage] = useState<string>("");
 
   console.log(contactContext);
 
@@ -68,7 +68,7 @@ const ContactForm: React.FC = () => {
         email: formData.email,
         subject: formData.subject,
         message: formData.message,
-      }); 
+      });
 
       setFormData({
         subject: "",
@@ -76,13 +76,11 @@ const ContactForm: React.FC = () => {
         email: "",
       });
 
-      setConfirmationMessage('Thank you for your feedback!');
+      setConfirmationMessage("Thank you for your feedback!");
     } catch (error) {
-      setConfirmationMessage('Error with your submission, try again later');
+      setConfirmationMessage("Error with your submission, try again later");
       console.log("Error in from submission: " + error);
     }
-
-    
   };
 
   return (
@@ -95,8 +93,24 @@ const ContactForm: React.FC = () => {
         <HeaderText>{contactContext.title}</HeaderText>
         <h2>{contactContext.subHeaders[0]} </h2>
         <div>{contactContext.text}</div>
-        <button style={{marginTop: '2%'}}>
-          <a target={"_blank"} href={buttonUrl} rel={"noopener noreferrer"} dangerouslySetInnerHTML={{__html: button.displayValue}} />
+        <button style={{ marginTop: "2%" }}>
+          <a
+            target={"_blank"}
+            href={buttonUrl}
+            rel={"noopener noreferrer"}
+            dangerouslySetInnerHTML={{ __html: button.displayValue }}
+          />
+        </button>
+        <h2>For Prospective Employees</h2>
+        <button style={{ marginTop: "2%" }}>
+          <a
+            target={"_blank"}
+            href={"https://www.primroseschools.com/careers/search-jobs"}
+            rel={"noopener noreferrer"}
+            dangerouslySetInnerHTML={{
+              __html: "Job Openings",
+            }}
+          />
         </button>
         {/* <h2>{contactContext.subHeaders[1]}</h2>
         <StyledForm onSubmit={handleSubmit}>

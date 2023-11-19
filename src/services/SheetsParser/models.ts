@@ -25,6 +25,7 @@ export interface SheetsSchoolCardData {
   lat?: number;
   long?: number;
   stateSymbol?: string;
+  hasDefaultImg?: boolean;
 }
 
 export interface SheetsBannerData {
