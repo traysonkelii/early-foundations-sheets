@@ -4,7 +4,6 @@ import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import logo from "../../../public/images/early.svg";
-import primrose from "../../../public/images/primrose.svg";
 import { useSheetsContext } from "@/context/SheetsContext";
 import { useMediaQuery } from "react-responsive";
 
@@ -28,17 +27,6 @@ const Home = () => {
         />
       </Banner>
       <HomeTextHolder>
-        <div style={{ margin: "2%", marginTop: "40px" }}>
-          <Link href="https://www.primroseschools.com/" target="_blank">
-            <Image
-              src={primrose}
-              height={200}
-              width={isMobile ? 150 : 200}
-              alt={""}
-            />
-          </Link>
-        </div>
-
         <div style={{ textAlign: "justify" }}>
           <p dangerouslySetInnerHTML={{ __html: mainText }} />
         </div>
@@ -78,6 +66,7 @@ const HomeTextHolder = styled.div`
   margin-right: 20%;
   margin-left: 20%;
   margin-bottom: 10%;
+  margin-top: 5%;
   line-height: 2;
   font-size: large;
   text-align: center;
