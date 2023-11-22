@@ -43,7 +43,6 @@ const Team = () => {
       <Banner
         backgroundUrl={teamContext.bannerUrl}
         gradient={BannerGradient.toLight}
-        backgroundSize={"contain"}
       />
       <TextHolder>
         <HeaderText>{teamContext.title}</HeaderText>

@@ -15,7 +15,6 @@ const Approach = () => {
       <Banner
         backgroundUrl={approachContext.bannerUrl}
         gradient={BannerGradient.toLight}
-        backgroundSize={"contain"}
       />
       <TextHolder>
         <HeaderText>{approachContext.title}</HeaderText>

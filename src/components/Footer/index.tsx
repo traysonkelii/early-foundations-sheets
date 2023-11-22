@@ -28,17 +28,7 @@ const Footer = () => {
                 justifyContent: "center",
               }}
             >
-              <p>
-                Privacy Policy | Terms |{" "}
-                <a
-                  href="https://www.linkedin.com/in/traysonkelii/"
-                  style={{ textDecoration: "none", color: "black" }}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Site Credit
-                </a>
-              </p>
+              <p>Privacy Policy | Terms</p>
               <span
                 style={
                   isMobile
