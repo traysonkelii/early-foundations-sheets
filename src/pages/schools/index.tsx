@@ -14,7 +14,6 @@ const Schools = () => {
     <>
       <Banner
         backgroundUrl={schoolsContext.bannerUrl}
-        gradient={BannerGradient.toLight}
         backgroundAttachment={"scroll"}
       />
       <TextHolder>

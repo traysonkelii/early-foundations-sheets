@@ -5,6 +5,28 @@ import { useSheetsContext } from "@/context/SheetsContext";
 import React from "react";
 import styled from "styled-components";
 
+const Team = () => {
+  const { teamContext } = useSheetsContext();
+  return (
+    <>
+      <Banner backgroundUrl={teamContext.bannerUrl} />
+      <TextHolder>
+        <HeaderText>{teamContext.title}</HeaderText>
+        {teamContext.bios.map((person, index) => (
+          <TeamMember
+            name={person.name}
+            role={person.title}
+            descArray={person.desc}
+            key={index}
+          />
+        ))}
+      </TextHolder>
+    </>
+  );
+};
+
+export default Team;
+
 const TeamMemeberContainer = styled.div`
   text-align: left;
   margin-top: "50px";
@@ -35,28 +57,3 @@ const TeamMember = ({
     </TeamMemeberContainer>
   );
 };
-
-const Team = () => {
-  const { teamContext } = useSheetsContext();
-  return (
-    <>
-      <Banner
-        backgroundUrl={teamContext.bannerUrl}
-        gradient={BannerGradient.toLight}
-      />
-      <TextHolder>
-        <HeaderText>{teamContext.title}</HeaderText>
-        {teamContext.bios.map((person, index) => (
-          <TeamMember
-            name={person.name}
-            role={person.title}
-            descArray={person.desc}
-            key={index}
-          />
-        ))}
-      </TextHolder>
-    </>
-  );
-};
-
-export default Team;

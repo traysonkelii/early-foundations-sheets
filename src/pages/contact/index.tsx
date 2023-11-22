@@ -5,42 +5,6 @@ import { useSheetsContext } from "@/context/SheetsContext";
 import React, { useState } from "react";
 import styled from "styled-components";
 
-type FormDataType = {
-  subject: string;
-  message: string;
-  email: string;
-};
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  margin: auto;
-`;
-
-const StyledLabel = styled.label`
-  display: block;
-  margin-bottom: 15px;
-`;
-
-const StyledInput = styled.input`
-  margin-top: 5px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  width: 100%;
-`;
-
-const StyledButton = styled.button`
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  background-color: #667517;
-  color: #fff;
-  cursor: pointer;
-  margin-top: 10px;
-`;
-
 const ContactForm: React.FC = () => {
   const { contactContext, writeToForm } = useSheetsContext();
 
@@ -85,10 +49,7 @@ const ContactForm: React.FC = () => {
 
   return (
     <>
-      <Banner
-        backgroundUrl={contactContext.bannerUrl}
-        gradient={BannerGradient.toLight}
-      />
+      <Banner backgroundUrl={contactContext.bannerUrl} />
       <TextHolder>
         <HeaderText>{contactContext.title}</HeaderText>
         <h2>{contactContext.subHeaders[0]} </h2>
@@ -151,5 +112,41 @@ const ContactForm: React.FC = () => {
     </>
   );
 };
+
+type FormDataType = {
+  subject: string;
+  message: string;
+  email: string;
+};
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: auto;
+`;
+
+const StyledLabel = styled.label`
+  display: block;
+  margin-bottom: 15px;
+`;
+
+const StyledInput = styled.input`
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+`;
+
+const StyledButton = styled.button`
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #667517;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 10px;
+`;
 
 export default ContactForm;

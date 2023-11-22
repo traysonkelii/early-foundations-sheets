@@ -12,10 +12,7 @@ const Approach = () => {
 
   return (
     <>
-      <Banner
-        backgroundUrl={approachContext.bannerUrl}
-        gradient={BannerGradient.toLight}
-      />
+      <Banner backgroundUrl={approachContext.bannerUrl} />
       <TextHolder>
         <HeaderText>{approachContext.title}</HeaderText>
         <div style={{ textAlign: "left" }}>

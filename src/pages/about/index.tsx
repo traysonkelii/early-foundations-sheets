@@ -9,10 +9,7 @@ const About = () => {
 
   return (
     <>
-      <Banner
-        backgroundUrl={aboutContext.bannerUrl}
-        gradient={BannerGradient.toLight}
-      />
+      <Banner backgroundUrl={aboutContext.bannerUrl} />
       <TextHolder>
         <HeaderText>{aboutContext.title}</HeaderText>
         <div style={{ textAlign: "left" }}>{aboutContext.text}</div>
