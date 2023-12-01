@@ -14,8 +14,7 @@ const Schools = () => {
     <>
       <Banner
         backgroundUrl={schoolsContext.bannerUrl}
-        gradient={BannerGradient.toLight}
-        backgroundAttachment={'scroll'}
+        backgroundAttachment={"scroll"}
       />
       <TextHolder>
         <HeaderText>{schoolsContext.title}</HeaderText>
@@ -57,7 +56,7 @@ const SchoolContainer = styled.div`
   img {
     width: 150px;
     height: 100px;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   > ${CardContainer} {

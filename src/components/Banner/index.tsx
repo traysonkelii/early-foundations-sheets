@@ -15,6 +15,7 @@ export interface BannerProps {
   gradient?: BannerGradient;
   children?: ReactNode;
   backgroundAttachment?: string;
+  backgroundSize?: string;
 }
 
 export const Banner = ({
@@ -23,6 +24,7 @@ export const Banner = ({
   gradient = BannerGradient.none,
   children,
   backgroundAttachment = "fixed",
+  backgroundSize = "cover",
 }: BannerProps) => {
   const { gradientStart, gradientEnd, gradientColor } = getGradient(gradient);
 
@@ -35,6 +37,7 @@ export const Banner = ({
         gradientEnd={gradientEnd}
         gradientColor={gradientColor}
         backgroundAttachment={backgroundAttachment}
+        backgroundSize={backgroundSize}
       >
         {children}
       </BannerImage>
@@ -49,10 +52,10 @@ interface BannerImageProps {
   gradientEnd: number;
   gradientColor: number;
   backgroundAttachment: string;
+  backgroundSize: string;
 }
 
 const BannerImage = styled.div<BannerImageProps>`
-  background-size: cover;
   width: 100%;
   height: ${(props) => props.height};
   background-position: center;
@@ -67,6 +70,8 @@ const BannerImage = styled.div<BannerImageProps>`
   justify-content: center;
   text-align: center;
   background-attachment: ${(props) => props.backgroundAttachment};
+  background-size: ${(props) => props.backgroundSize};
+  background-repeat: no-repeat;
   @media all and (max-width: 900px) {
     height: 200px;
     background-size: cover;

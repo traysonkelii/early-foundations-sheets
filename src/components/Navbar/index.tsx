@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../../public/images/early.svg";
-import primrose from "../../../public/images/primrose.svg";
 import styles from "./Navbar.module.css";
 import { useMediaQuery } from "react-responsive";
 import { useState } from "react";
@@ -34,42 +33,35 @@ const Navbar = () => {
       {!isMobile && (
         <Link href="/schools" style={{ textDecoration: "none" }}>
           <div className={styles.navbar__item}>
-          <p>{tabs.tab2}</p>
+            <p>{tabs.tab2}</p>
           </div>
         </Link>
       )}
       {!isMobile && (
         <Link href="/approach" style={{ textDecoration: "none" }}>
           <div className={styles.navbar__item}>
-          <p>{tabs.tab3}</p>
+            <p>{tabs.tab3}</p>
           </div>
         </Link>
       )}
       {!isMobile && (
         <Link href="/team" style={{ textDecoration: "none" }}>
           <div className={styles.navbar__item}>
-          <p>{tabs.tab4}</p>
+            <p>{tabs.tab4}</p>
           </div>
         </Link>
       )}
       {!isMobile && (
         <Link href="/careers" style={{ textDecoration: "none" }}>
           <div className={styles.navbar__item}>
-          <p>{tabs.tab5}</p>
+            <p>{tabs.tab5}</p>
           </div>
         </Link>
       )}
       {!isMobile && (
         <Link href="/contact" style={{ textDecoration: "none" }}>
           <div className={styles.navbar__item}>
-          <p>{tabs.tab6}</p>
-          </div>
-        </Link>
-      )}
-      {!isMobile && (
-        <Link href="https://www.primroseschools.com/" target="_blank">
-          <div style={{ marginLeft: "20px" }}>
-            <Image src={primrose} alt={"SVG logo"} width={50} height={50} />
+            <p>{tabs.tab6}</p>
           </div>
         </Link>
       )}
@@ -93,7 +85,7 @@ const Navbar = () => {
             onClick={() => handleMobileClick()}
           >
             <div className={styles.navbar__item}>
-            <p>{tabs.tab1}</p>
+              <p>{tabs.tab1}</p>
             </div>
           </Link>
           <Link
@@ -102,7 +94,7 @@ const Navbar = () => {
             onClick={() => handleMobileClick()}
           >
             <div className={styles.navbar__item}>
-            <p>{tabs.tab2}</p>
+              <p>{tabs.tab2}</p>
             </div>
           </Link>
           <Link
@@ -111,7 +103,7 @@ const Navbar = () => {
             onClick={() => handleMobileClick()}
           >
             <div className={styles.navbar__item}>
-            <p>{tabs.tab3}</p>
+              <p>{tabs.tab3}</p>
             </div>
           </Link>
           <Link
@@ -120,7 +112,7 @@ const Navbar = () => {
             onClick={() => handleMobileClick()}
           >
             <div className={styles.navbar__item}>
-            <p>{tabs.tab4}</p>
+              <p>{tabs.tab4}</p>
             </div>
           </Link>
           <Link
@@ -129,7 +121,7 @@ const Navbar = () => {
             onClick={() => handleMobileClick()}
           >
             <div className={styles.navbar__item}>
-            <p>{tabs.tab5}</p>
+              <p>{tabs.tab5}</p>
             </div>
           </Link>
           <Link
@@ -138,7 +130,7 @@ const Navbar = () => {
             onClick={() => handleMobileClick()}
           >
             <div className={styles.navbar__item}>
-            <p>{tabs.tab6}</p>
+              <p>{tabs.tab6}</p>
             </div>
           </Link>
         </div>

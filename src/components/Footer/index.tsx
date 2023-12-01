@@ -2,7 +2,7 @@ import React from "react";
 import { FaLinkedin } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { useMediaQuery } from "react-responsive";
-import styles from './Footer.module.css';
+import styles from "./Footer.module.css";
 
 const Footer = () => {
   const isMobile = useMediaQuery({ maxWidth: 900 });
@@ -19,9 +19,7 @@ const Footer = () => {
                 justifyItems: "end",
               }}
             >
-              <p>
-                &copy;{2022} Early Foundations. All Rights Reserved.
-              </p>
+              <p>&copy;{2023} Early Foundations. All Rights Reserved.</p>
             </div>
             <div
               style={{
@@ -30,10 +28,7 @@ const Footer = () => {
                 justifyContent: "center",
               }}
             >
-              <p>
-                Privacy Policy | Terms |{" "}
-                <a href="https://www.linkedin.com/in/traysonkelii/" style={{textDecoration: 'none', color: 'black'}} target="_blank" rel="noreferrer">Site Credit</a>
-              </p>
+              <p>Privacy Policy | Terms</p>
               <span
                 style={
                   isMobile
@@ -64,7 +59,5 @@ const Footer = () => {
     </>
   );
 };
-
-
 
 export default Footer;

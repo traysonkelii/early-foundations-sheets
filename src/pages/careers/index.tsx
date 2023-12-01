@@ -8,10 +8,7 @@ const Careers = () => {
 
   return (
     <>
-      <Banner
-        backgroundUrl={careersContext.bannerUrl}
-        gradient={BannerGradient.toLight}
-      />
+      <Banner backgroundUrl={careersContext.bannerUrl} />
       <TextHolder>
         <HeaderText>{careersContext.title}</HeaderText>
         <div style={{ textAlign: "left" }}>

@@ -25,9 +25,9 @@
 }
 
 @media all and (max-width: 900px) {
-  .footer_separator { 
+  .footer_separator {
     justify-content: space-between;
-    font-size: .3rem;
+    font-size: 0.6rem;
     margin-bottom: 4%;
   }
 }
