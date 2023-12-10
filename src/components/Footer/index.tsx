@@ -3,9 +3,11 @@ import { FaLinkedin } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { useMediaQuery } from "react-responsive";
 import styles from "./Footer.module.css";
+import { useSheetsContext } from "@/context/SheetsContext";
 
 const Footer = () => {
   const isMobile = useMediaQuery({ maxWidth: 900 });
+  const { privacyLink, termsLink } = useSheetsContext();
   return (
     <>
       <div className={styles.footer_container}>
@@ -28,7 +30,15 @@ const Footer = () => {
                 justifyContent: "center",
               }}
             >
-              <p>Privacy Policy | Terms</p>
+              <p>
+                <a href={privacyLink} target="_blank" rel="noreferrer">
+                  Privacy Policy
+                </a>{" "}
+                |{" "}
+                <a href={termsLink} target="_blank" rel="noreferrer">
+                  Terms
+                </a>
+              </p>
               <span
                 style={
                   isMobile
@@ -37,7 +47,7 @@ const Footer = () => {
                 }
               >
                 <a
-                  href="https://www.linkedin.com/in/traysonkelii/"
+                  href="https://www.linkedin.com/company/early-foundations-llc/about/"
                   target="_blank"
                   rel="noreferrer"
                 >
