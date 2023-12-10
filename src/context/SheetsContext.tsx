@@ -67,6 +67,8 @@ export interface SheetsContext {
   }) => object;
   isLoading: boolean;
   tabs: DynamicTabs;
+  privacyLink: string;
+  termsLink: string;
 }
 
 const SheetsContext = createContext<SheetsContext>({
@@ -86,6 +88,8 @@ const SheetsContext = createContext<SheetsContext>({
   writeToForm: () => [],
   isLoading: true,
   tabs: {},
+  privacyLink: "",
+  termsLink: "",
 });
 
 export const useSheetsContext = () => useContext<SheetsContext>(SheetsContext);
@@ -118,6 +122,8 @@ export const SheetsContextProvider = ({
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [tabs, setTabs] = useState({});
+  const [privacyLink, setPrivacyLink] = useState("");
+  const [termsLink, setTermsLink] = useState("");
 
   const wrtieToForm = async ({
     email,
@@ -252,6 +258,9 @@ export const SheetsContextProvider = ({
           tab6: contactContent.tabName,
         });
 
+        setPrivacyLink(homeContent.privacyPolicyLink ?? "");
+        setTermsLink(homeContent.termsLink ?? "");
+
         setIsLoading(false);
       }
     );
@@ -268,6 +277,8 @@ export const SheetsContextProvider = ({
     writeToForm: wrtieToForm,
     isLoading,
     tabs,
+    termsLink,
+    privacyLink,
   };
 
   return (

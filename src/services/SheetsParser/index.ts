@@ -17,6 +17,7 @@ import {
 import { SheetsBioParser } from "./SheetsBioParser";
 import { SheetsJobLinkParser } from "./SheetsJobLinkParser";
 import { SheetsTabParser } from "./SheetsTabNameParser";
+import { SheetsLinkParser } from "./SheetsLinkParser";
 
 export interface SheetsData {
   text?: SheetsTextData;
@@ -30,11 +31,13 @@ export interface SheetsData {
   subtext?: SheetsTextData;
   tabName?: string;
   subHeaders?: string[];
+  privacyPolicyLink?: string;
+  termsLink?: string;
 }
 
 export const SheetsParser = (sheetsData: any): SheetsData => {
   const contentArray: string[][] = sheetsData.data;
-  const content: SheetsData = { cards: [], bios: [], jobs:[], subHeaders: [] };
+  const content: SheetsData = { cards: [], bios: [], jobs: [], subHeaders: [] };
   if (contentArray) {
     contentArray.forEach((row) => {
       const key = row[0];
@@ -66,8 +69,12 @@ export const SheetsParser = (sheetsData: any): SheetsData => {
           break;
         case "tabName":
           content.tabName = SheetsTabParser(row);
-        case "subHeader": 
+        case "subHeader":
           content.subHeaders = SheetsMultiTextParser(row).value;
+        case "privacyPolicyLink":
+          content.privacyPolicyLink = SheetsLinkParser(row);
+        case "termsLink":
+          content.termsLink = SheetsLinkParser(row);
         default:
       }
     });
