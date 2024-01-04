@@ -31,7 +31,7 @@ export interface SheetsData {
   subtext?: SheetsTextData;
   tabName?: string;
   subHeaders?: string[];
-  privacyPolicyLink?: string;
+  privacyPolicyLink?: SheetsTextData;
   termsLink?: string;
 }
 
@@ -72,7 +72,7 @@ export const SheetsParser = (sheetsData: any): SheetsData => {
         case "subHeader":
           content.subHeaders = SheetsMultiTextParser(row).value;
         case "privacyPolicyLink":
-          content.privacyPolicyLink = SheetsLinkParser(row);
+          content.privacyPolicyLink = SheetsTextParser(row);
         case "termsLink":
           content.termsLink = SheetsLinkParser(row);
         default:

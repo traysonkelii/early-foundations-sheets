@@ -258,7 +258,7 @@ export const SheetsContextProvider = ({
           tab6: contactContent.tabName,
         });
 
-        setPrivacyLink(homeContent.privacyPolicyLink ?? "");
+        setPrivacyLink(homeContent.privacyPolicyLink?.value ?? "");
         setTermsLink(homeContent.termsLink ?? "");
 
         setIsLoading(false);
