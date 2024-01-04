@@ -3,11 +3,10 @@ import { FaLinkedin } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { useMediaQuery } from "react-responsive";
 import styles from "./Footer.module.css";
-import { useSheetsContext } from "@/context/SheetsContext";
+import Link from "next/link";
 
 const Footer = () => {
   const isMobile = useMediaQuery({ maxWidth: 900 });
-  const { privacyLink, termsLink } = useSheetsContext();
   return (
     <>
       <div className={styles.footer_container}>
@@ -31,13 +30,11 @@ const Footer = () => {
               }}
             >
               <p>
-                <a href={privacyLink} target="_blank" rel="noreferrer">
-                  Privacy Policy
-                </a>{" "}
-                |{" "}
-                <a href={termsLink} target="_blank" rel="noreferrer">
-                  Terms
-                </a>
+                <Link href="/policy" style={{ textDecoration: "none" }}>
+                  <div className={styles.navbar__item}>
+                    <p>Privacy Policy</p>
+                  </div>
+                </Link>
               </p>
               <span
                 style={
