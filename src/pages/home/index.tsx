@@ -27,7 +27,7 @@ const Home = () => {
         />
       </Banner>
       <HomeTextHolder>
-        <div style={{ textAlign: "justify" }}>
+        <div>
           <p dangerouslySetInnerHTML={{ __html: mainText }} />
         </div>
         <Link href="/about">
