@@ -9,7 +9,11 @@ const Team = () => {
   const { teamContext } = useSheetsContext();
   return (
     <>
-      <Banner backgroundUrl={teamContext.bannerUrl} />
+      <Banner
+        backgroundUrl={teamContext.bannerUrl}
+        backgroundAttachment="scroll"
+        height="850px"
+      />
       <TextHolder>
         <HeaderText>{teamContext.title}</HeaderText>
         {teamContext.bios.map((person, index) => (

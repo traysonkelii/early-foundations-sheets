@@ -12,7 +12,11 @@ const Approach = () => {
 
   return (
     <>
-      <Banner backgroundUrl={approachContext.bannerUrl} />
+      <Banner
+        backgroundUrl={approachContext.bannerUrl}
+        backgroundAttachment="scroll"
+        height="650px"
+      />
       <TextHolder>
         <HeaderText>{approachContext.title}</HeaderText>
         <div style={{ textAlign: "left" }}>
