@@ -15,7 +15,7 @@ const Approach = () => {
       <Banner
         backgroundUrl={approachContext.bannerUrl}
         backgroundAttachment="scroll"
-        height="650px"
+        backgroundSize="contain"
       />
       <TextHolder>
         <HeaderText>{approachContext.title}</HeaderText>

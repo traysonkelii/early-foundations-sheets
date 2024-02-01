@@ -12,7 +12,7 @@ const Team = () => {
       <Banner
         backgroundUrl={teamContext.bannerUrl}
         backgroundAttachment="scroll"
-        height="850px"
+        backgroundSize="contain"
       />
       <TextHolder>
         <HeaderText>{teamContext.title}</HeaderText>
